@@ -1,0 +1,16 @@
+{
+  "name": "injected-onboarding",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon --watch src --exec 'npm start'",
+    "serve": "http-server example",
+    "start": "npm run build && npm run serve"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "nodemon": "^3.0.1",
+    "typescript": "^5.1.6"
+  }
+}

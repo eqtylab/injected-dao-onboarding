@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Injected Onboarding</title>
+    <!-- Load styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- !! Remove tailwind in production !! -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 1. Install Magic SDK -->
+    <script src="https://auth.magic.link/sdk"></script>
+    <!-- 2. Embed Unlock paywall -->
+    <script src="https://paywall.unlock-protocol.com/static/unlock.latest.min.js"></script>
+    <!-- 3. Load onboarding injection script -->
+    <script src="js/onboarding.js"></script>
+    <!-- 4. Setup onboarding UI -->
+    <script src="js/setup.js"></script>
+  </head>
+  <body class="bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800">
+    <main class="flex justify-center items-center h-full">
+      <div class="flex flex-col justify-center items-center">
+        <button id="connect-btn" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">
+          Connect
+        </button>
+      </div>
+    </main>
+    <div id="onboarding-frame"></div>
+  </body>
+</html>

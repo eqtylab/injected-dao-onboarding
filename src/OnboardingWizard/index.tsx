@@ -1,6 +1,8 @@
 import { h, FunctionComponent } from "preact";
 import { MagicType } from "../lib/magic";
 import { PaywallConfig } from "../lib/paywall";
+import { WizardStepProvider } from "./context/WizardStepContext";
+import { WizardStepSelector } from "./components/WizardStepSelector";
 
 interface OnboardingWizardProps {
   id: string;
@@ -14,12 +16,14 @@ export const OnboardingWizard: FunctionComponent<OnboardingWizardProps> = ({
   paywallConfig
 }) => {
   return (
-    <div id={id}>
-      <div id='modal-background'>
-        <div id='modal-content'>
-          <p>{JSON.stringify(paywallConfig, null, 2)}</p>
+    <WizardStepProvider>
+      <div id={id}>
+        <div id='modal-background'>
+          <div id='modal-content'>
+            <WizardStepSelector />
+          </div>
         </div>
       </div>
-    </div>
+    </WizardStepProvider>
   );
 };

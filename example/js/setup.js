@@ -21,7 +21,7 @@ const setup = () => {
   }
 
   const onboarding = new Onboarding({
-    root: document.getElementById(ROOT_ID),
+    id: 'onboarding-wizard',
     magicConfig: {
       apiKey: MAGIC_PUBLISHABLE_KEY,
       network: NETWORK_ID,

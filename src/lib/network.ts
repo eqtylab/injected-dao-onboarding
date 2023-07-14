@@ -2,8 +2,7 @@ import { EthNetworkName, MagicUserMetadata } from "magic-sdk";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { MagicType } from "./magic";
 import { OAuthRedirectConfiguration } from "@magic-ext/oauth";
-
-export type AccountData = Partial<MagicUserMetadata>;
+import { AccountData } from "./account";
 
 export const getChainId = (name: EthNetworkName): number => {
   switch (name) {

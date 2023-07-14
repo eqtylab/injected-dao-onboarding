@@ -1,7 +1,7 @@
 import Paywall from "@unlock-protocol/paywall";
 import { networks } from "@unlock-protocol/networks";
+import { getChainId } from "./network";
 import { UnlockConfig } from "./unlock";
-import { EthNetworkConfiguration } from "magic-sdk";
 
 const createPaywall = () => {
   // We make sure that the window object is available
@@ -37,26 +37,14 @@ export interface PaywallConfigLock {
   network?: number;
 }
 
-export const getPaywallNetworkId = (networkConfig: EthNetworkConfiguration) => {
-  switch (networkConfig) {
-    case 'mainnet':
-      return 1;
-    case 'goerli':
-      return 5;
-    default:
-      throw new Error(`Network configuration not supported: ${networkConfig}`);
-  }
-};
-
 export const buildPaywallConfig = (config: UnlockConfig): PaywallConfig => {
-  const network = getPaywallNetworkId(config.network);
-
+  const chainId = getChainId(config.network);
   return {
-    network,
+    network: chainId,
     locks: {
       [config.lockAddress]: {
         name: config.name,
-        network,
+        network: chainId,
       },
     },
     autoconnect: false,

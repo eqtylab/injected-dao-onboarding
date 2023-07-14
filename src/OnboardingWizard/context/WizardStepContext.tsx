@@ -2,7 +2,6 @@ import { FunctionComponent, ComponentChildren, createContext } from "preact";
 import { useState } from "preact/hooks";
 
 export type WizardStep = "connect" | "view-account";
-
 const initialStep: WizardStep = "connect";
 
 type WizardStepContextType = {

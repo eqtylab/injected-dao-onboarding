@@ -1,9 +1,9 @@
-import { EthNetworkConfiguration } from "@magic-sdk/types";
+import { EthNetworkName } from "@magic-sdk/types";
 import { mainnet, goerli } from "@unlock-protocol/networks";
 
 export type UnlockConfig = {
   name: string;
-  network: EthNetworkConfiguration;
+  network: EthNetworkName;
   lockAddress: string;
 };
 

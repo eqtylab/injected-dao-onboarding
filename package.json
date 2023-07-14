@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "nodemon --watch src --watch examples/js/setup.js --watch example/css --exec 'npm start'",
+    "dev": "webpack-dev-server --mode development",
     "serve": "http-server example -p 3000",
     "start": "npm run build && npm run serve"
   },
@@ -13,10 +13,10 @@
     "@magic-ext/oauth": "^12.4.1",
     "@magic-sdk/provider": "^18.4.1",
     "@unlock-protocol/types": "^0.0.7",
+    "dotenv": "^16.3.1",
     "html-webpack-plugin": "^5.5.3",
     "http-server": "^14.1.1",
     "magic-sdk": "^18.4.1",
-    "nodemon": "^3.0.1",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",
     "webpack": "^5.88.1",
@@ -27,6 +27,7 @@
     "@unlock-protocol/networks": "^0.0.15",
     "@unlock-protocol/paywall": "^0.6.6",
     "@unlock-protocol/unlock-js": "^0.38.3",
+    "ethers": "^5.7.2",
     "preact": "^10.16.0"
   }
 }

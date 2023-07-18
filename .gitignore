@@ -6,8 +6,10 @@
 # Node
 node_modules
 
-# The actual bundle
-example/js/onboarding.js
+# Bundles
+example/js/index.html
+example/js/onboarding.*
+dist
 
 # Typescript artifacts
 tsconfig.tsbuildinfo

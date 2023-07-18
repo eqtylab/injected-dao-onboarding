@@ -2,11 +2,12 @@
   "name": "injected-onboarding",
   "version": "0.0.0",
   "private": true,
+  "browser": "./dist/index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack-dev-server --mode development",
-    "serve": "http-server example -p 3000",
-    "start": "npm run build && npm run serve"
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack serve --open --config webpack.dev.js",
+    "build-example": "webpack --config webpack.dev.js",
+    "serve-example": "http-server example -p 3000"
   },
   "devDependencies": {
     "@magic-ext/auth": "^1.4.1",
@@ -21,7 +22,8 @@
     "typescript": "^5.1.6",
     "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^4.15.1",
+    "webpack-merge": "^5.9.0"
   },
   "dependencies": {
     "@unlock-protocol/networks": "^0.0.15",

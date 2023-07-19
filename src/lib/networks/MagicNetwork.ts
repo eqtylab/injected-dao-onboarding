@@ -15,7 +15,7 @@ export class MagicNetwork extends Network {
     this.magic = magic;
     this.provider = this.magic.rpcProvider as any;
     this.oauthRedirects = oauthRedirects;
-    console.log("Network:", "Magic EVM", networkName);
+    console.info("Network:", "Magic EVM", networkName);
   }
 
   // Static method to create MagicNetwork instance based on network type
@@ -28,21 +28,22 @@ export class MagicNetwork extends Network {
   }
 
   private async loginWithOauth(
-    oauthProvider: OAuthRedirectConfiguration["provider"]
+    oauthRedirect: OAuthRedirectConfiguration
   ) {
     const oauthRedirectIndex = this.oauthRedirects.findIndex(({ provider }) => {
-      return provider === oauthProvider; 
+      return provider === oauthRedirect.provider; 
     })
     if (oauthRedirectIndex === -1) {
-      throw Error(`No OAuth redirect config specified for provider: ${oauthProvider}`);
+      throw Error(`No OAuth redirect config specified for provider: ${oauthRedirect.provider}`);
     }
-    await this.magic.oauth.loginWithRedirect(this.oauthRedirects[oauthRedirectIndex]);
+    await this.magic.oauth.loginWithRedirect(oauthRedirect);
   }
 
   private async loginWithEmail(
     email: string,
     afterLoginSuccess?: (userMetadata: MagicUserMetadata) => void
   ) {
+
     // Trigger Magic link to be sent to user
     await this.magic.auth.loginWithMagicLink({
       email,
@@ -74,21 +75,18 @@ export class MagicNetwork extends Network {
 
   public async connect(args: {
     email?: string;
-    oauthProvider?: OAuthRedirectConfiguration["provider"];
+    oauthRedirect?: OAuthRedirectConfiguration;
     // Only used when logging in with email
     afterLoginSuccess?: (userMetadata: MagicUserMetadata) => void;
   }) {
-    const { email, oauthProvider, afterLoginSuccess } = args;
+    const { email, oauthRedirect, afterLoginSuccess } = args;
     if (email) {
       await this.loginWithEmail(email, afterLoginSuccess);
-    } else if (oauthProvider && !afterLoginSuccess) {
-      await this.loginWithOauth(oauthProvider);
-    } else if (oauthProvider && afterLoginSuccess) {
-      console.log("FETCHING REDIRECT RESULT...");
+    } else if (oauthRedirect && !afterLoginSuccess) {
+      await this.loginWithOauth(oauthRedirect);
+    } else if (oauthRedirect && afterLoginSuccess) {
       const redirectResult = await this.magic.oauth.getRedirectResult();
-      console.log("RECEIVED REDIRECT RESULT", redirectResult);
       const userMetaData = redirectResult.magic.userMetadata;
-      console.log("RECEIVED USER META DATA", redirectResult.magic.userMetadata);
       afterLoginSuccess(userMetaData);
     } else {
       /* no-op */
@@ -99,7 +97,7 @@ export class MagicNetwork extends Network {
     return await this.isLoggedIn();
   }
 
-  public async onDisconnect(): Promise<void> {
+  public async disconnect(): Promise<void> {
     await this.logout();
   }
 }

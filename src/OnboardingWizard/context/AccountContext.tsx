@@ -32,7 +32,8 @@ export const AccountProvider: FunctionComponent<{ children: ComponentChildren }>
   const _hydrateAccountState = useCallback(async () => {
     try {
       // Set loading to true while we are fetching account status
-      if (await network?.isConnected()) {
+      const isConnected = await network?.isConnected();
+      if (isConnected) {
         const accountData = await network?.getAccount();
         if (accountData) {
           // Pull account data, update the state

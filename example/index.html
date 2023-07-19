@@ -10,8 +10,10 @@
     <script src="js/onboarding.js"></script>
   </head>
   <body>
+    <div class="app-container">
+      <button id="onboarding-cta-btn">Join DAO</button>
+    </div>
     <div id="onboarding-frame"></div>
-    <button id="join-dao-cta-btn">Join DAO</button>
     <!-- 3. Setup onboarding UI -->
     <script defer>
       console.log("Performing Onboarding UI setup...");
@@ -34,10 +36,18 @@
         network: 'goerli',
         magicConfig: {
           apiKey: magicApiKey,
-          oauthRedirects: [{
-            provider: 'discord',
-            redirectURI: new URL("/callback", baseUrl).href
-          }],
+          oauthRedirects: [
+            // https://magic.link/docs/auth/login-methods/social-logins/integration/social-providers/discord
+            {
+              provider: 'discord',
+              redirectURI: new URL("/callback", baseUrl).href
+            },
+            // https://magic.link/docs/auth/login-methods/social-logins/integration/social-providers/twitter
+            {
+              provider: 'twitter',
+              redirectURI: new URL("/callback", baseUrl).href
+            },
+          ],
           callbackRoute: '/callback',
         },
         unlockConfig: {
@@ -46,13 +56,18 @@
         },
       });
 
-      // Setup click handler to render onboarding UI
-      const ctaElement = document.getElementById('join-dao-cta-btn');
+      // Detect if onboarding is initially visible
+      const onboardingIsVisible = !!(new URL(location.href).searchParams.get('onboarding'));
+
+      // Mount onboarding UI to the page
+      onboarding.render(document.getElementById('onboarding-frame'), onboardingIsVisible);
+
+      // Setup click handler to show onboarding UI
+      const ctaElement = document.getElementById('onboarding-cta-btn');
       ctaElement.onclick = e => {
         e.preventDefault();
-        onboarding.render(document.getElementById('onboarding-frame'));
-      };
-      onboarding.render(document.getElementById('onboarding-frame'));
+        onboarding.show();
+      };      
     </script>
   </body>
 </html>

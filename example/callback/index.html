@@ -1,0 +1,71 @@
+<html>
+
+<head>
+  <title>Injected Onboarding</title>
+  <!-- Load styles -->
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <!-- 1. Install Magic SDK -->
+  <script src="https://auth.magic.link/sdk"></script>
+  <!-- 2. Load onboarding injection script -->
+  <script src="../js/onboarding.js"></script>
+</head>
+
+<body>
+  <div class="app-container">
+    <h2>Getting OAuth 2.0 result and redirecting...</h2>
+  </div>
+  <!-- 3. Setup onboarding UI -->
+  <script defer>
+    console.log("Get OAuth redirect result...");
+
+    // Replace these with your deployment's own relevant variables
+    const baseUrl = window.BASE_URL;                  // "https://localhost:3000"
+    const magicApiKey = window.MAGIC_PUBLISHABLE_KEY; // "pk_live_..."
+    const lockAddress = window.PAYWALL_LOCK_ADDRESS;  // "0x..."
+
+    // Check for Magic and Onboarding SDK globals
+    if (typeof window?.Magic === "undefined") {
+      throw new Error("No Magic object found!");
+    }
+    if (typeof window?.Onboarding === "undefined") {
+      throw new Error("No Onboarding object found!");
+    }
+
+    // Initialize onboarding sdk
+    const onboarding = new Onboarding({
+      network: 'goerli',
+      magicConfig: {
+        apiKey: magicApiKey,
+        oauthRedirects: [
+          {
+            provider: 'discord',
+            redirectURI: new URL("/callback", baseUrl).href
+          },
+          {
+            provider: 'twitter',
+            redirectURI: new URL("/callback", baseUrl).href
+          },
+        ],
+        callbackRoute: '/callback',
+      },
+      unlockConfig: {
+        name: "DAO Membership",
+        lockAddress,
+      },
+    });
+
+    // Get the final OAuth 2.0 result and redirect...
+    // https://magic.link/docs/auth/login-methods/social-logins/integration/oauth-implementation/web
+    onboarding.magic.oauth.getRedirectResult()
+      .then(() => {
+        window.location.href = '/?onboarding=true';
+      })
+      .catch(error => {
+        console.error(error)
+        window.alert('There was an error with your OAuth login')
+      });
+  </script>
+</body>
+
+</html>

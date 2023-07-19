@@ -1,4 +1,4 @@
-import { EthNetworkName, MagicUserMetadata } from "magic-sdk";
+import { EthNetworkName } from "magic-sdk";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { MagicType } from "./magic";
 import { OAuthRedirectConfiguration } from "@magic-ext/oauth";
@@ -36,7 +36,7 @@ export abstract class Network {
   public abstract isConnected(): boolean | Promise<boolean>;
 
   // Abstract method to handle any disconnection side effects
-  public abstract onDisconnect(): void | Promise<void>;
+  public abstract disconnect(): void | Promise<void>;
 
   // Static method to create Network instance based on network type
   public static create(

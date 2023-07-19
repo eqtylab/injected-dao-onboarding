@@ -20,6 +20,13 @@ export class InjectedNetwork extends Network {
     }
   }
 
+  // Static method to create MagicNetwork instance based on network type
+  public static create(
+    networkName: EthNetworkName,
+  ): InjectedNetwork {
+    return new InjectedNetwork(networkName);
+  }
+
   public async getAccount() {
     return {
       publicAddress: await this.ethersProvider?.getSigner().getAddress(),
@@ -55,7 +62,7 @@ export class InjectedNetwork extends Network {
     }
   }
 
-  public async onDisconnect() {
+  public async disconnect() {
     /* no-op */
   }
 }

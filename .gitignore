@@ -13,3 +13,6 @@ dist
 
 # Typescript artifacts
 tsconfig.tsbuildinfo
+
+# Artifacts
+.DS_Store

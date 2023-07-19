@@ -35,17 +35,17 @@ export class InjectedNetwork extends Network {
 
   // Method to check if user is logged in using Metamask
   public async connect() {
+    console.log('Connecting with web3 wallet')
     try {
       await this.ethersProvider.send("eth_requestAccounts", []);
-      await (window as any).ethereum.enabled();
     } catch (err) {
+      console.error(err)
       /* no-op */
     }
   }
 
   public async isConnected() {
     try {
-      // await (window as any).ethereum.enabled();
       const isConnected = await (window as any).ethereum.isConnected();
       if (isConnected) {
         const { chainId } = await this.ethersProvider.getNetwork();

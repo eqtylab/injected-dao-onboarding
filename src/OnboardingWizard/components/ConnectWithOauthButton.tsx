@@ -26,7 +26,6 @@ export const ConnectWithOauthButton: FunctionComponent<ConnectWithOauthButtonPro
       onClick={() => {
         setShouldConnect(true);
         setPrefersInjected(false);
-        network.connect(oauthRedirect);
       }}
     >
       {buttonLabel}

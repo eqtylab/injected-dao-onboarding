@@ -2,11 +2,11 @@
   "name": "injected-onboarding",
   "version": "0.0.0",
   "private": true,
-  "browser": "./dist/index.js",
+  "browser": "./dist/onboarding.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack serve --open --config webpack.dev.js",
-    "build-example": "webpack --config webpack.dev.js",
+    "build-example": "npm run build && mkdir -p ./example/js && cp -r ./dist/* ./example/js/",
     "serve-example": "http-server example -p 3000",
     "start": "npm run build-example && npm run serve-example"
   },

@@ -1,5 +1,4 @@
 import { render } from "preact";
-import { MutableRef, useRef } from "preact/hooks";
 import { EthNetworkName, Magic } from "magic-sdk";
 import { OAuthExtension, OAuthRedirectConfiguration } from "@magic-ext/oauth";
 import { MagicConfig, MagicType } from "./lib/magic";

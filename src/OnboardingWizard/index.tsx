@@ -3,6 +3,7 @@ import { MagicType } from "../lib/magic";
 import { PaywallConfig } from "../lib/paywall";
 import { NetworkProvider } from "./context/NetworkContex";
 import { AccountProvider } from "./context/AccountContext";
+import { UnlockProvider } from "./context/UnlockContext";
 import { WizardStepProvider } from "./context/WizardStepContext";
 import { WizardStepSelector } from "./components/WizardStepSelector";
 import { EthNetworkName } from "magic-sdk";
@@ -49,22 +50,24 @@ export class OnboardingWizard extends Component<
         oauthRedirects={oauthRedirects}
       >
         <AccountProvider>
-          <WizardStepProvider>
-            <div id={id}>
-              {isVisible && (
-                <div id="modal-background" onClick={this.hide.bind(this)}>
-                  <div id="modal-container">
-                    <div
-                      id="modal-content"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <WizardStepSelector />
+          <UnlockProvider paywallConfig={paywallConfig}>
+            <WizardStepProvider>
+              <div id={id}>
+                {isVisible && (
+                  <div id="modal-background" onClick={this.hide.bind(this)}>
+                    <div id="modal-container">
+                      <div
+                        id="modal-content"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <WizardStepSelector />
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </div>
-          </WizardStepProvider>
+                )}
+              </div>
+            </WizardStepProvider>
+          </UnlockProvider>
         </AccountProvider>
       </NetworkProvider>
     );

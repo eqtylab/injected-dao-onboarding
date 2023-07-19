@@ -38,8 +38,8 @@ export class InjectedNetwork extends Network {
     console.log('Connecting with web3 wallet')
     try {
       await this.ethersProvider.send("eth_requestAccounts", []);
-    } catch (err) {
-      console.error(err)
+    } catch (error) {
+      console.error(error)
       /* no-op */
     }
   }

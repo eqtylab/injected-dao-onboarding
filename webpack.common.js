@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { EnvironmentPlugin } = require("webpack");
+const { EnvironmentPlugin, ProvidePlugin } = require("webpack");
 
 module.exports = {
   entry: "./src/index.ts",
@@ -14,6 +14,9 @@ module.exports = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    fallback: {
+      buffer: require.resolve("buffer/"),
+    },
   },
   plugins: [
     new EnvironmentPlugin([
@@ -21,5 +24,8 @@ module.exports = {
       "PAYWALL_LOCK_ADDRESS",
       "MAGIC_PUBLISHABLE_KEY",
     ]),
-  ]
+    new ProvidePlugin({
+      Buffer: ["buffer", "Buffer"],
+    }),
+  ],
 };

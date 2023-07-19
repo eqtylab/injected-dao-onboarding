@@ -24,7 +24,6 @@ export const ConnectWithEmailStep: FunctionComponent = () => {
 
   const handleEmailOnChange = useCallback((event: unknown) => {
     const { target } = event as HTMLElementEvent<HTMLInputElement>;
-    console.log(target.value)
     setEmail(target.value);
   }, [setEmail]);
 

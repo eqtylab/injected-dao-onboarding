@@ -20,7 +20,7 @@ module.exports = {
   },
   plugins: [
     new EnvironmentPlugin({
-      "BASE_URL": process.env.VERCEL_URL, // this is to fix deployemnts
+      BASE_URL: `https://${process.env.VERCEL_URL}`, // this is to fix vercel deployemnts
       PAYWALL_LOCK_ADDRESS: "",
       MAGIC_PUBLISHABLE_KEY: ""
     }),

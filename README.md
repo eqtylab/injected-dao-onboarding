@@ -4,11 +4,53 @@ This script allows you to inject a Web2 friendly onboarding flow into your DAO's
 White-label wallets are supported by [Magic Auth](https://magic.link/docs/auth/overview#magic-auth)  
 Membership NFT's are supported by [Unlock protocol](https://unlock-protocol.com/)
 
-Try the example live at [https://injected-dao-onboarding.vercel.app/](https://injected-dao-onboarding.vercel.app/)
+<!-- Try the example live at [https://injected-dao-onboarding.vercel.app/](https://injected-dao-onboarding.vercel.app/) -->
 
 ## Usage
 You can inject the bundled `onboarding.js` script directly into your website.
 See the [example](example/index.html) for how to setup the onboarding UI and render on your webpage.
+
+```html
+<html>
+  <head>
+    <title>Your DAO's Landing Page</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/onboarding.js"></script>
+  </head>
+  <body>
+    <button id="onboarding-cta-btn">Join DAO</button>
+    <div id="onboarding-frame"></div>
+
+    <!-- Setup onboarding UI -->
+    <script defer>
+      if (typeof window?.Onboarding === "undefined") {
+        throw new Error("No Onboarding object found!");
+      }
+
+      const onboarding = new Onboarding({
+        network: 'mainnet',
+        magicConfig: {
+          apiKey: "pk_live_..."
+        },
+        unlockConfig: {
+          name: "DAO Membership",
+          lockAddress: "0x..."
+        },
+      });
+
+      // Mount onboarding UI to the page
+      onboarding.render(document.getElementById('onboarding-frame'), onboardingIsVisible);
+
+      // Setup click handler to show onboarding UI
+      const ctaElement = document.getElementById('onboarding-cta-btn');
+      ctaElement.onclick = e => {
+        e.preventDefault();
+        onboarding.show();
+      };      
+    </script>
+  </body>
+</html>
+```
 
 ## Setup
 Clone this repo and create an empty `.env` file.

@@ -22,10 +22,6 @@
     const magicApiKey = window.MAGIC_PUBLISHABLE_KEY; // "pk_live_..."
     const lockAddress = window.PAYWALL_LOCK_ADDRESS;  // "0x..."
 
-    // Check for Magic and Onboarding SDK globals
-    if (typeof window?.Magic === "undefined") {
-      throw new Error("No Magic object found!");
-    }
     if (typeof window?.Onboarding === "undefined") {
       throw new Error("No Onboarding object found!");
     }

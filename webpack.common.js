@@ -19,11 +19,11 @@ module.exports = {
     },
   },
   plugins: [
-    new EnvironmentPlugin([
-      "BASE_URL",
-      "PAYWALL_LOCK_ADDRESS",
-      "MAGIC_PUBLISHABLE_KEY",
-    ]),
+    new EnvironmentPlugin({
+      "BASE_URL": process.env.VERCEL_URL, // this is to fix deployemnts
+      PAYWALL_LOCK_ADDRESS: "",
+      MAGIC_PUBLISHABLE_KEY: ""
+    }),
     new ProvidePlugin({
       Buffer: ["buffer", "Buffer"],
     }),

@@ -39,7 +39,7 @@ See the [example](example/index.html) for how to setup the onboarding UI and ren
       });
 
       // Mount onboarding UI to the page
-      onboarding.render(document.getElementById('onboarding-frame'), onboardingIsVisible);
+      onboarding.render(document.getElementById('onboarding-frame'));
 
       // Setup click handler to show onboarding UI
       const ctaElement = document.getElementById('onboarding-cta-btn');

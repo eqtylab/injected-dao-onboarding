@@ -4,9 +4,10 @@ This script allows you to inject a Web2 friendly onboarding flow into your DAO's
 White-label wallets are supported by [Magic Auth](https://magic.link/docs/auth/overview#magic-auth)  
 Membership NFT's are supported by [Unlock protocol](https://unlock-protocol.com/)
 
+Try the example live at [https://injected-dao-onboarding.vercel.app/](https://injected-dao-onboarding.vercel.app/)
+
 ## Usage
 You can inject the bundled `onboarding.js` script directly into your website.
-
 See the [example](example/index.html) for how to setup the onboarding UI and render on your webpage.
 
 ## Setup

@@ -54,7 +54,7 @@ $ npm run start
 ```
 
 ## Building for production
-To bundle the `onboarding.js` for production simply run the build npm script.
+To bundle the `onboarding.js` for production simply run the dist script.
 ```
-$ npm run build
+$ npm run dist
 ```

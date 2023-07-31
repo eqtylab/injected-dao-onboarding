@@ -56,6 +56,15 @@ export const UnlockProvider: FunctionComponent<UnlockProviderProps> = ({
   useEffect(() => {
     setPaywall(initialPaywall);
     setWeb3Service(initialWeb3Service);
+    // Detect lock status update
+    window.addEventListener('unlockProtocol.status', function (event: CustomEvent) {
+      if (event?.detail?.state === 'unlocked') {
+        setHasValidKey(true);
+      } else {
+        setHasValidKey(false);
+      }
+      setLoading(false);
+    });
   }, []);
 
   // Set / update the paywall config

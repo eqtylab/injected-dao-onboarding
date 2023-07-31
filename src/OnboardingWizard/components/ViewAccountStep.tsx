@@ -25,7 +25,6 @@ export const ViewAccountStep: FunctionComponent = () => {
     async (e: any) => {
       e.preventDefault();
       await paywall.loadCheckoutModal();
-      await checkHasValidKey();
     },
     [paywall]
   );
